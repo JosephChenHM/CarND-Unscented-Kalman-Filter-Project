@@ -28,8 +28,20 @@ public:
   ///* state covariance matrix
   MatrixXd P_;
 
+  ///*Process Noise Covariance Matrix
+  MatrixXd Q;
+
   ///* predicted sigma points matrix
   MatrixXd Xsig_pred_;
+
+  ///* Masurement noises matrix
+  MatrixXd R_laser_;
+
+  ///* Masurement noises matrix
+  MatrixXd R_radar_;
+
+  ///* matrix for sigma points
+  MatrixXd Xsig_;
 
   ///* time when the state is true, in us
   long long time_us_;
@@ -67,7 +79,11 @@ public:
   ///* Sigma point spreading parameter
   double lambda_;
 
+  ///* the current NIS for radar
+  double NIS_radar_;
 
+  ///* the current NIS for laser
+  double NIS_laser_;
   /**
    * Constructor
    */

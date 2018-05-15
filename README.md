@@ -1,19 +1,51 @@
-# Unscented Kalman Filter Project Starter Code
+# Unscented Kalman Filter Project
 Self-Driving Car Engineer Nanodegree Program
 
-In this project utilize an Unscented Kalman Filter to estimate the state of a moving object of interest with noisy lidar and radar measurements. Passing the project requires obtaining RMSE values that are lower that the tolerance outlined in the project rubric. 
+In this project utilize an Unscented Kalman Filter to estimate the state of a moving object of interest with noisy lidar and radar measurements. Passing the project requires obtaining RMSE values that are lower that the tolerance **[X, Y, VX, VY]** > **[.09, .10, .40, .30]**. 
 
 This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
+
+## UKF System Design
+![](https://i.imgur.com/q5xbu0W.png)
+
+
+* **Initialize UFK matrices** is implemented in line `16 ~ 108` in `ukf.cpp`
+* **Predict function** is implemented in line `175 ~ 279` in `ukf.cpp`
+* **Update laser function** is implemented in line `285 ~ 398` in `ukf.cpp`
+* **Update radar function** is implemented in line `404 ~ 557` in `ukf.cpp`
+* All the **Process Measurement** will be evalutae by **RMSE**(Root-Mean-Square-Error). It is implemented in line `12 ~ 30` in `tools.cpp`
+---
+```
+CarND-Extended-Kalman-Filter-Project
+│   README.md
+│   install-ubuntu.sh
+│   install-mac.sh
+│   CMakeLists.txt
+│   cmakepatch.txt
+│    ...
+└───build
+│    ...
+└───src
+│   │   main.cpp
+│   │   measurement_package.h
+│   │   ukf.cpp // Implement UKF 
+│   │   ukf.h
+│   │   tools.cpp    // Calculate RMSE
+│   │   tools.h
+│   │
+│   └───Eigen    // matrix library
+│       │   ...
+```
 
 This repository includes two files that can be used to set up and intall [uWebSocketIO](https://github.com/uWebSockets/uWebSockets) for either Linux or Mac systems. For windows you can use either Docker, VMware, or even [Windows 10 Bash on Ubuntu](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/) to install uWebSocketIO. Please see [this concept in the classroom](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/16cf4a78-4fc7-49e1-8621-3450ca938b77) for the required version and installation scripts.
 
 Once the install for uWebSocketIO is complete, the main program can be built and ran by doing the following from the project top directory.
 
-1. mkdir build
-2. cd build
-3. cmake ..
-4. make
-5. ./UnscentedKF
+1. `mkdir build`
+2. `cd build`
+3. `cmake ..`
+4. `make`
+5. `./UnscentedKF`
 
 Tips for setting up your environment can be found [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
 
@@ -26,18 +58,18 @@ Here is the main protcol that main.cpp uses for uWebSocketIO in communicating wi
 
 INPUT: values provided by the simulator to the c++ program
 
-["sensor_measurement"] => the measurment that the simulator observed (either lidar or radar)
+``["sensor_measurement"] => the measurment that the simulator observed (either lidar or radar)``
 
 
 OUTPUT: values provided by the c++ program to the simulator
-
+```
 ["estimate_x"] <= kalman filter estimated position x
 ["estimate_y"] <= kalman filter estimated position y
 ["rmse_x"]
 ["rmse_y"]
 ["rmse_vx"]
 ["rmse_vy"]
-
+```
 ---
 
 ## Other Important Dependencies
@@ -81,12 +113,12 @@ If you'd like to generate your own radar and lidar data, see the
 [utilities repo](https://github.com/udacity/CarND-Mercedes-SF-Utilities) for
 Matlab scripts that can generate additional data.
 
-## Project Instructions and Rubric
-
-This information is only accessible by people who are already enrolled in Term 2
-of CarND. If you are enrolled, see [the project page](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/c3eb3583-17b2-4d83-abf7-d852ae1b9fff/concepts/f437b8b0-f2d8-43b0-9662-72ac4e4029c1)
-for instructions and the project rubric.
-
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
-
+## Result
+| Input |   MSE   |
+| ----- | ------- |
+|  px   | 0.0687  |
+|  py   | 0.0802  |
+|  vx   | 0.1974  |
+|  vy   | 0.2622  |
+## Video
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Pz2WRpUXGzc/0.jpg)](https://www.youtube.com/watch?v=Pz2WRpUXGzc)
